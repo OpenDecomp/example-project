@@ -26,7 +26,12 @@ void player_update(Player *player) {
     player->x = math_clamp(player->x, 0, WORLD_WIDTH);
 }
 
-/* TODO: player_jump */
+void player_jump(Player *player) {
+    if (player->on_ground) {
+        player->vy = PLAYER_JUMP_SPEED;
+        player->on_ground = 0;
+    }
+}
 
 /* Matches us only: eu does something else here. */
 void player_take_damage(Player *player, s32 amount) {
