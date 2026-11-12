@@ -1,0 +1,10 @@
+# Build output and generated files
+build/
+build.ninja
+objdiff.json
+.ninja_*
+__pycache__/
+
+# Your copy of the game's files never goes into git. This example's game is made up, so it
+# force-adds its original objects (git add -f orig).
+orig/*/*
