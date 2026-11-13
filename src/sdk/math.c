@@ -16,7 +16,6 @@ s32 math_clamp(s32 x, s32 lo, s32 hi) {
     return x;
 }
 
-/* Nonmatching: same result, but the loop compiles differently. */
 u32 math_isqrt(u32 x) {
     u32 result = 0;
     u32 bit = 1u << 30;
@@ -24,14 +23,14 @@ u32 math_isqrt(u32 x) {
     while (bit > x) {
         bit >>= 2;
     }
-    for (; bit != 0; bit >>= 2) {
-        u32 trial = result + bit;
-
-        result >>= 1;
-        if (x >= trial) {
-            x -= trial;
-            result += bit;
+    while (bit != 0) {
+        if (x >= result + bit) {
+            x -= result + bit;
+            result = (result >> 1) + bit;
+        } else {
+            result >>= 1;
         }
+        bit >>= 2;
     }
     return result;
 }
